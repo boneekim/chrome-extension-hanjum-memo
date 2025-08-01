@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한줌 메모</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1 class="title">📝 한줌 메모</h1>
+            <div class="auth-section">
+                <span id="userInfo" class="user-info">🔄 계정 확인 중...</span>
+            </div>
+        </div>
+
+        <!-- 그룹 관리 섹션 -->
+        <div class="group-section">
+            <div class="group-controls">
+                <select id="groupSelect" class="group-select">
+                    <option value="">전체 메모</option>
+                </select>
+                <button id="addGroupBtn" class="btn btn-secondary">그룹 추가</button>
+                <button id="deleteGroupBtn" class="btn btn-danger">그룹 삭제</button>
+            </div>
+            
+            <div id="addGroupForm" class="add-group-form" style="display: none;">
+                <input type="text" id="groupNameInput" placeholder="그룹명을 입력하세요" class="input">
+                <div class="form-buttons">
+                    <button id="saveGroupBtn" class="btn btn-primary">저장</button>
+                    <button id="cancelGroupBtn" class="btn btn-secondary">취소</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메모 입력 섹션 -->
+        <div class="memo-input-section">
+            <textarea id="memoInput" placeholder="메모를 입력하세요..." class="memo-textarea"></textarea>
+            <button id="addMemoBtn" class="btn btn-primary">메모 추가</button>
+        </div>
+
+        <!-- 검색 및 메모 목록 컨테이너 -->
+        <div class="memo-list-container">
+            <!-- 검색 섹션 -->
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="메모 검색 (그룹명 포함)..." class="input search-input">
+                <button id="clearSearchBtn" class="btn btn-secondary">검색 초기화</button>
+            </div>
+
+            <!-- 메모 목록 액션 -->
+            <div class="memo-actions">
+                <button id="clearAllBtn" class="btn btn-danger">전체 삭제</button>
+                <button id="exportBtn" class="btn btn-secondary">📤 내보내기</button>
+                <span class="memo-count">메모 <span id="memoCount">0</span>개</span>
+            </div>
+
+            <!-- 메모 목록 -->
+            <div class="memo-list" id="memoList">
+                <!-- 메모들이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+
+        <!-- 내보내기/불러오기 섹션 -->
+        <div id="exportImportSection" class="export-import-section" style="display: none;">
+            <div class="section-header">
+                <h3>📁 데이터 관리</h3>
+                <button id="quickCloseBtn" class="btn-close" title="닫기">✕</button>
+            </div>
+            
+            <!-- 내보내기 옵션 -->
+            <div class="export-options">
+                <h4>📤 내보내기</h4>
+                <div class="option-group">
+                    <label class="radio-label">
+                        <input type="radio" name="exportScope" value="all" checked>
+                        <span>모든 그룹과 메모</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="exportScope" value="current">
+                        <span>현재 선택된 그룹만</span>
+                    </label>
+                </div>
+                <div class="option-group">
+                    <label class="radio-label">
+                        <input type="radio" name="exportFormat" value="json" checked>
+                        <span>JSON 형식 (권장)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="exportFormat" value="csv">
+                        <span>CSV 형식 (Excel용)</span>
+                    </label>
+                </div>
+                <button id="executeExportBtn" class="btn btn-primary">내보내기 실행</button>
+            </div>
+
+            <!-- 불러오기 옵션 -->
+            <div class="import-options">
+                <h4>📥 불러오기</h4>
+                <input type="file" id="importFileInput" accept=".json,.csv" style="display: none;">
+                <div class="option-group">
+                    <label class="radio-label">
+                        <input type="radio" name="importMode" value="merge" checked>
+                        <span>기존 데이터와 병합</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="importMode" value="replace">
+                        <span>기존 데이터 덮어쓰기</span>
+                    </label>
+                </div>
+                <button id="selectFileBtn" class="btn btn-secondary">파일 선택</button>
+                <button id="executeImportBtn" class="btn btn-primary" style="display: none;">불러오기 실행</button>
+                <div id="selectedFileName" class="selected-file-name" style="display: none;"></div>
+            </div>
+
+            <div class="section-actions">
+                <button id="closeExportImportBtn" class="btn btn-primary">📋 목록으로 돌아가기</button>
+            </div>
+        </div>
+
+        <!-- 로딩 표시 -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <span>처리 중...</span>
+        </div>
+
+        <!-- 저작권 표시 -->
+        <div class="footer">
+            <div class="copyright">© 2025 BnK. All rights reserved.</div>
+        </div>
+    </div>
+
+    <!-- Supabase 클라이언트 -->
+    <script src="supabase.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html> 

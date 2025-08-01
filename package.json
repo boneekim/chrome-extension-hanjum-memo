@@ -1,0 +1,56 @@
+{
+  "name": "hanjum-memo-chrome-extension",
+  "version": "1.0.0",
+  "description": "중요한 정보를 간단하게 저장하고 어디서든 접근할 수 있는 크롬 확장 프로그램",
+  "main": "popup.js",
+  "scripts": {
+    "dev": "echo 'Chrome에서 개발자 모드로 확장 프로그램을 로드하세요'",
+    "build": "echo 'Chrome Web Store 배포용 파일을 압축합니다' && zip -r hanjum-memo-extension.zip . -x '*.git*' 'node_modules/*' '*.DS_Store' 'package.json' 'package-lock.json' '.env*'",
+    "lint": "echo 'JavaScript 코드 스타일 검사'",
+    "test": "echo 'No tests specified yet'"
+  },
+  "keywords": [
+    "chrome-extension",
+    "memo",
+    "note",
+    "productivity",
+    "supabase",
+    "google-auth",
+    "한줌메모"
+  ],
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/hanjum-memo-chrome-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/hanjum-memo-chrome-extension/issues"
+  },
+  "homepage": "https://github.com/yourusername/hanjum-memo-chrome-extension#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "manifest": {
+    "manifest_version": 3,
+    "name": "한줌 메모",
+    "version": "1.0.0",
+    "description": "중요한 정보를 간단하게 저장하고 어디서든 접근할 수 있는 메모 확장 프로그램"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {},
+  "browserslist": [
+    "Chrome >= 88"
+  ],
+  "chrome-extension": {
+    "manifest": "./manifest.json",
+    "popup": "./popup.html",
+    "background": "./background.js",
+    "icons": "./icons/"
+  }
+} 
